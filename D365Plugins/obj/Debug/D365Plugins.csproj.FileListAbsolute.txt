@@ -1,0 +1,10 @@
+A:\GitHub\D365 Case Management\D365Plugins\bin\Debug\D365Plugins.dll
+A:\GitHub\D365 Case Management\D365Plugins\bin\Debug\D365Plugins.pdb
+A:\GitHub\D365 Case Management\D365Plugins\bin\Debug\Microsoft.Crm.Sdk.Proxy.dll
+A:\GitHub\D365 Case Management\D365Plugins\bin\Debug\Microsoft.Xrm.Sdk.dll
+A:\GitHub\D365 Case Management\D365Plugins\bin\Debug\Microsoft.Crm.Sdk.Proxy.xml
+A:\GitHub\D365 Case Management\D365Plugins\bin\Debug\Microsoft.Xrm.Sdk.xml
+A:\GitHub\D365 Case Management\D365Plugins\obj\Debug\D365Plugins.csprojAssemblyReference.cache
+A:\GitHub\D365 Case Management\D365Plugins\obj\Debug\D365Plugins.csproj.CopyComplete
+A:\GitHub\D365 Case Management\D365Plugins\obj\Debug\D365Plugins.dll
+A:\GitHub\D365 Case Management\D365Plugins\obj\Debug\D365Plugins.pdb
