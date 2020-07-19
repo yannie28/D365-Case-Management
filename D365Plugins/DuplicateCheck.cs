@@ -5,13 +5,15 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xrm.Sdk.Query;
 
-// This plugin creates a Task record when user creates a Contact record. This task due date is within 2 days.
+// This plugins prevents users from creating Contact record with duplicate email address
 
 namespace D365Plugins
 {
-    public class TaskCreate : IPlugin
+    public class DuplicateCheck : IPlugin
     {
+
         public void Execute(IServiceProvider serviceProvider)
         {
             // Obtain the tracing service
@@ -43,25 +45,23 @@ namespace D365Plugins
                     // 'Schema Name' is for Web API
                     // 'Display Name' is the one you can see in the UI
 
-                    Entity taskRecord = new Entity("task");
+                    string email = String.Empty;
 
-                    // Single Line of Text
-                    taskRecord.Attributes.Add("subject", "Follow Up");
-                    taskRecord.Attributes.Add("description", "Please follow up with contact");
+                    if (contact.Attributes.Contains("emailaddress1"))
+                    {
+                        email = contact.Attributes["emailaddress1"].ToString();
 
-                    // Date
-                    taskRecord.Attributes.Add("scheduledend", DateTime.Now.AddDays(2));
+                        // select * from contact where emailaddress1 = 'email'
 
-                    // Option Set
-                    taskRecord.Attributes.Add("prioritycode", new OptionSetValue(2));
+                        QueryExpression query = new QueryExpression("contact");
+                        //query.ColumnSet = new ColumnSet(true) // retrieves all columns
+                        query.ColumnSet = new ColumnSet(new string[] { "emailaddress1" }); // retrieves specific column names
+                        query.Criteria.AddCondition("emailaddress1", ConditionOperator.Equal, email); // adds the where clause of the select statement
 
-                    // ParentRecord or Lookup
-                    // taskRecord.Attributes.Add("regardingobjectid", new EntityReference("contact", contact.Id));
-                    taskRecord.Attributes.Add("regardingobjectid", contact.ToEntityReference()); // this is better because you don't have to create in memory object
 
-                    Guid taskGuid = service.Create(taskRecord);
+                    }
 
-                 }
+                }
 
                 catch (FaultException<OrganizationServiceFault> ex)
                 {
@@ -75,6 +75,5 @@ namespace D365Plugins
                 }
             }
         }
-
     }
 }

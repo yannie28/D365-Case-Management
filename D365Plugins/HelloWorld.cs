@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xrm.Sdk;
 
+// This plugin updates the description attribute of the Contact entity.
+
 namespace D365Plugins
 {
     public class HelloWorld : IPlugin
